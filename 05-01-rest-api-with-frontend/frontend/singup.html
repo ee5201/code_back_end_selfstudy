@@ -8,7 +8,10 @@
   <script>
     function zzz () {
       //1. 휴대폰 번호 가져오기 
-      const ccc = document.getElementById("qqq").value
+      const ccc = document.getElementById("111").value
+      const ddd = document.getElementById("222").value
+
+      console.log(`010${ccc}${ddd}`)
       console.log("나의 핸드폰 번호 ", ccc)
       
 
@@ -25,7 +28,9 @@
   </script>
 </head>
 <body>
-  휴대폰 번호 <input type="text" id="qqq"/>
+  휴대폰 번호 
+  <input type="text" id="111"/>
+  <input type="text" id="222"/>
   <button  onclick="zzz()">인증하기</button>
   <div id="result">인증상태</div>
   <button>회원가입 하기 </button>

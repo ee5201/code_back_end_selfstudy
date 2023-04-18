@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  <script>
+    async function zzz () {
+      const results = await axios.get("http://localhost:3000/starbucks").then((res)=>{
+        console.log(res.data.map((el)=>{
+          console.log(el.name)
+        })) 
+
+      })
+    }
+
+  </script>
+  <title>Test</title>
+</head>
+<body>
+  <button onclick="zzz()">클릭</button>
+  <button onclick="qqq()">안녕</button>
+  <div id="ddd">sssss</div>
+
+  
+</body>
+</html>
