@@ -1,22 +1,27 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <title>회원가입 연습하기</title>
   <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
   <script>
-    function zzz() {
-      //1 휴대 번호 가져오기 
+    function zzz () {
+      //1. 휴대폰 번호 가져오기 
       const ccc = document.getElementById("qqq").value
-      console.log("나의 핸드폰 번호", ccc)
+      console.log("나의 핸드폰 번호 ", ccc)
+      
 
-      axios.post("http://localhost:3000/phone",{
-        aaa:ccc
+      //2. 해당 휴대폰 번호로 인증번호 요청하기
+      axios.post("http://localhost:3000/token/phone",{
+        aaa: ccc
       }).then((res)=>{
         console.log(res)
-        document.getElementById("result").innerText =res.data
+        document.getElementById("result").innerText= res.data
       })
-    }
+        
 
+    }
   </script>
 </head>
 <body>
