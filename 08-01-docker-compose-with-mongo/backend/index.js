@@ -42,7 +42,7 @@ app.post('/token/phone',(req,res)=>{
 })
 
 app.post('/users',(req,res)=>{
-  const user =req.body.myuser
+  const user =req.body.aaa
   	// 1. 이메일이 정상인지 확인(1-존재여부, 2-"@"포함여부)
     const isValid = CheckValidationEmail(user.email);
     if (isValid) {
