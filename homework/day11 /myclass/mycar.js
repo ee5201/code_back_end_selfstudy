@@ -11,13 +11,13 @@ class Mycar {
     console.log(ccc)
 
   }
- start = () =>{
+  start = () =>{
   console.log("출발하기")
- }
+}
 
- stop = () =>{
+  stop = () =>{
   console.log("정지하기")
- }
+}
 }
 
 
