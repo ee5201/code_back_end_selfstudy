@@ -1,0 +1,23 @@
+copy 와 RUN 순서를 바꾼다. 
+이유: 파일이 하나 변경하게 되면 4번에서 파일을 변경시키고 그 아래로 새롭게 다시 리렌더링된다.
+서비스가 커지면 노드 모듈들은 커지고 yarn install 하게 되면 시간이 엄청 길어진.
+그러므로 4k번과 6번을 교체하게 되면 yarn install 추가 되지 않았을 경우 빠르게 기존거를 그대로 유지시키고 
+파일만 변경시켜 빠르게 실행 되게 된다. 
+
+=>
+1. FROM node:14
+2. 
+3. WORKDIR /myfolder/
+4. COPY . / myfolder/
+5. 
+6. Run Yarn install
+7. CMD yarn dev
+
+=수정>
+1. FROM node:14
+2. 
+3. WORKDIR /myfolder/
+4. Run yarn install
+5. 
+6. COPY . / myfolder/
+7. CMD yarn dev
