@@ -1,0 +1,88 @@
+show databases;
+
+use myproject;
+
+show databases;
+
+use myproject;
+
+show tables;
+
+desc products;
+
+select * from products;
+
+
+insert into products(id,name,description,price)
+			values(uuid(),'마우스','정말 좋은 마우스입니다.',15000);
+		
+insert into products(id,name,description,price)
+			values(uuid(),'노브북','정말 좋은 노트북입니다.',20000);
+			
+insert into products(id,name,description,price)
+			values(uuid(),'셔츠','정말 좋은 셔츠입니다.',30000);
+
+DELETE  from products WHERE name='셔츠';
+
+UPDATE products SET price = 18000 WHERE name='마우스';
+
+
+# =======조인=============
+SELECT * from product_saleslocation;
+
+INSERT into product_saleslocation(id,address,addressDetail,lat,lng,meetingTime)
+			values(uuid(),'구로구','구로디지털단지',37.281723,127.192387,'2023-01-10');
+
+UPDATE products SET productSaleslocationId = '846d8374-ecee-11ed-a3f8-0eaf454cae83' WHERE name='마우스';	
+
+SELECT p.id,name,price,address,addressDetail as '상세주소'
+	from products p,product_saleslocation ps
+		WHERE p.productSaleslocationId =ps.id ;
+	
+	
+#=======추가기능들========
+	UPDATE  products 
+		SET  isSoldout  = TRUE 
+		WHERE name = '노트북' AND price =20000;
+	#노트북이면서 2만원인 상품만 true 
+	
+	UPDATE  products 
+		SET  isSoldout  = TRUE 
+		WHERE name = '노트북' OR  price =20000;
+	#노트북 또는  2만원인 상품만 true 
+	
+#=====주석쉽게 다는 방법====
+SELECT * 	
+	FROM  products p 
+	-- WHERE name '마우'
+	and price =5000
+	and isSoldout =false
+
+	=== name기준 총합 구하기 ====
+
+  ex
+  키보드 0     0  0
+  키보드 5000  0  0
+  이 두개를 합쳐서 만든다.
+  
+  select name, SUM(price)
+  from product_saleslocation
+  group by name
+
+  select name, MAX(price)
+  from products
+  group by name
+
+
+  select name,price, isSoldout from products
+  order by(정렬하라) price desc 내림차순
+
+  ansi: 미국 표준 협회
+
+  select name, addressfrom products p, product_saleslocation ps
+  WHERE p.productSaleslocationId = ps.id
+
+  => 바뀐다(아래)
+   select name, address 
+   from products p inner Join product_saleslocation ps
+  on p.productSaleslocationId = ps.id
