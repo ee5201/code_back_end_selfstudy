@@ -1,0 +1,35 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Board {
+  number: String!
+  writer: String!
+  title: String!
+  contents: String!
+  Phone: String!
+}
+
+type Query {
+  fetchBoards: [Board!]
+}
+
+type Mutation {
+  createBoard(createBoardInput: CreateBoardInput): String
+  Test(test: TestInput, qqq: String): String
+  BoardTest(writer: String, title: String, contents: String): String
+}
+
+input CreateBoardInput {
+  writer: String!
+  title: String!
+  contents: String!
+  Phone: String!
+}
+
+input TestInput {
+  name: String!
+  writer: String!
+  content: String!
+  title: String!
+}
