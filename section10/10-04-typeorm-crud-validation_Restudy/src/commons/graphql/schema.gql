@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 type Board {
-  number: Int!
+  id: String!
   writer: String!
   title: String!
   contents: String!
@@ -54,14 +54,15 @@ type Product {
 }
 
 type Query {
-  fetchBoards: [Board!]
+  fetchBoards: [Board!]!
   fetchProdcuts: [Product!]!
   fetchProduct(productId: String!): Product!
 }
 
 type Mutation {
-  createBoard(createBoardInput: CreateBoardInput): String
+  createBoard(createBoardInput: CreateBoardInput): Board!
   createProduct(creatBoard: CreateProductInput!): Product!
+  updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
 }
 
 input CreateBoardInput {
@@ -74,4 +75,10 @@ input CreateProductInput {
   name: String!
   description: String!
   price: Int!
+}
+
+input UpdateProductInput {
+  name: String
+  description: String
+  price: Int
 }
