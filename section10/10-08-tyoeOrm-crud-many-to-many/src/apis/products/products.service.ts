@@ -92,7 +92,7 @@ export class ProductServices {
       productTags: tags,
     });
 
-    return result;
+    return result2;
   }
   async update({
     productId,

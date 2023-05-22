@@ -14,6 +14,7 @@ import { Repository } from 'typeorm';
 import { Product } from './entities/product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductSaleslocationsService } from '../productsaleslocation/productSaleslocation.service';
+import { ProductTagsService } from '../productsTags/productTags.service';
 
 @Injectable()
 export class ProductService {
@@ -21,6 +22,7 @@ export class ProductService {
     @InjectRepository(Product)
     private readonly ProductServiceRepository: Repository<Product>,
     private readonly ProductSaleslocationServie: ProductSaleslocationsService,
+    private readonly productTagsService: ProductTagsService,
   ) {}
 
   findAll(): Promise<Product[]> {
@@ -57,11 +59,25 @@ export class ProductService {
     // });
     // return result;
     //2. 상품과 상품거래위치를 같이 등록하는 방법
-    const { productSaleslocation, productCategoryId, ...product } =
+    const { productSaleslocation, productCategoryId, productTags, ...product } =
       createProductInput;
+
+    //2-1 상품 거래위치 등록
     const result = await this.ProductSaleslocationServie.create({
       productSaleslocation,
     });
+
+    //2-2 상품 태그 등록
+    // productsTags가 ['#전자제품']
+    const tagNames = productTags.map((el) => el.replace('#', ''));
+    const prevTags = await this.productTagsService.findByName({ tagNames });
+    const temp = [];
+    tagNames.forEach((el) => {
+      const isExists = prevTags.find((prevEl) => el === prevEl.name);
+      if (!isExists) temp.push({ name: el });
+    });
+    const newTags = await this.productTagsService.bulkInsert({ names: temp }); // bulk insert는 save()로 불가능
+    const tags = [...prevTags, ...newTags.identifiers];
 
     const result2 = this.ProductServiceRepository.save({
       ...product,
@@ -69,22 +85,26 @@ export class ProductService {
       productCategory: {
         id: productCategoryId,
       },
+      productTags: tags,
     });
     return result2;
   }
 
-  async update({ productId, updateProductInput }: IProductServiceUpdate) {
+  async update({
+    productId,
+    updateProductInput,
+  }: IProductServiceUpdate): Promise<void> {
     const product = await this.findOne({ productId });
 
     this.checksoldout({ product });
 
     // 검증은 서비스에서 한다 서비스는 재사용하기 때문에
 
-    const result = this.ProductServiceRepository.save({
-      ...product, // 수정 후 수정되지 않은 다른 결과값까지 모두 객체로 돌려받고 싶을때
-      ...updateProductInput,
-    });
-    return result;
+    // const result = this.ProductServiceRepository.save({
+    //   ...product, // 수정 후 수정되지 않은 다른 결과값까지 모두 객체로 돌려받고 싶을때
+    //   ...updateProductInput,
+    // });
+    // return result;
   }
 
   async delete({ productId }: IProductServiceDelete): Promise<boolean> {

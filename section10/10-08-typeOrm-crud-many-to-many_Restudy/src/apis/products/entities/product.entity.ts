@@ -58,7 +58,7 @@ export class Product {
   @JoinTable()
   @ManyToMany(() => ProductTag, (productTag) => productTag.products)
   @Field(() => [ProductTag])
-  productTag: ProductTag[];
+  productTags: ProductTag[];
 
   // @CreateDateColumn() // 데이터 등록시 등록시간 자동으로 추가
   // createdAt: Date;

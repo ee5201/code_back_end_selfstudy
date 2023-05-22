@@ -13,7 +13,7 @@ export class ProductTag {
   @Field(() => String)
   name: string;
 
-  @ManyToMany(() => Product, (product) => product.productTag)
+  @ManyToMany(() => Product, (product) => product.productTags)
   @Field(() => [Product])
-  products: Product[];
+  products: Product;
 }

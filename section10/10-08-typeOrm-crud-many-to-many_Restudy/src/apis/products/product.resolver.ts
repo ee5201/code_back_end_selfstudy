@@ -29,7 +29,7 @@ export class ProductResolver {
   updateProduct(
     @Args('productId') productId: string,
     @Args('updateProductInput') updateProductInput: UpdateProductInput,
-  ): Promise<Product> {
+  ): Promise<void> {
     return this.productService.update({ productId, updateProductInput });
   }
 
