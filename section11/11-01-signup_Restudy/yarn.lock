@@ -1557,9 +1557,9 @@
     "@types/superagent" "*"
 
 "@types/validator@^13.7.10":
-  version "13.7.16"
-  resolved "https://registry.yarnpkg.com/@types/validator/-/validator-13.7.16.tgz#096c7951189e93ec49fd5df5bfbf088f0d95ea85"
-  integrity sha512-VyKmLktUHYLbrSbsRi241MSUlGYomQgK/tfCNpej3Gt5qDOM10AZ3nU2aR2s5JritClXuOBu4K7MkywVW/Y6Ow==
+  version "13.7.17"
+  resolved "https://registry.yarnpkg.com/@types/validator/-/validator-13.7.17.tgz#0a6d1510395065171e3378a4afc587a3aefa7cc1"
+  integrity sha512-aqayTNmeWrZcvnG2MG9eGYI6b7S5fl+yKgPs6bAjOTwPS316R5SxBGKvtSExfyoJU7pIeHJfsHI0Ji41RVMkvQ==
 
 "@types/yargs-parser@*":
   version "21.0.0"
@@ -5390,9 +5390,9 @@ tapable@^2.1.1, tapable@^2.2.0, tapable@^2.2.1:
   integrity sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==
 
 tar@^6.1.11:
-  version "6.1.14"
-  resolved "https://registry.yarnpkg.com/tar/-/tar-6.1.14.tgz#e87926bec1cfe7c9e783a77a79f3e81c1cfa3b66"
-  integrity sha512-piERznXu0U7/pW7cdSn7hjqySIVTYT6F76icmFk7ptU7dDYlXTm5r9A6K04R2vU3olYgoKeo1Cg3eeu5nhftAw==
+  version "6.1.15"
+  resolved "https://registry.yarnpkg.com/tar/-/tar-6.1.15.tgz#c9738b0b98845a3b344d334b8fa3041aaba53a69"
+  integrity sha512-/zKt9UyngnxIT/EAGYuxaMYgOIJiP81ab9ZfkILq4oNLPFX50qyYmu7jRj9qeXoxmJHjGlbH0+cm2uy1WCs10A==
   dependencies:
     chownr "^2.0.0"
     fs-minipass "^2.0.0"

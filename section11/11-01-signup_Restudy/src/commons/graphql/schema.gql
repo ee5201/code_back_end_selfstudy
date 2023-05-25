@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 type Board {
-  number: Int!
+  id: String!
   writer: String!
   title: String!
   contents: String!
@@ -12,6 +12,12 @@ type Board {
 type ProductCategory {
   id: String!
   name: String!
+}
+
+type ProductTag {
+  id: String!
+  name: String!
+  products: [Product!]!
 }
 
 type ProductSaleslocation {
@@ -28,11 +34,6 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type ProductTag {
-  name: String!
-  products: [Products!]!
-}
-
 type User {
   id: String!
   name: String!
@@ -40,11 +41,11 @@ type User {
   age: Int!
 }
 
-type Products {
+type Product {
   id: String!
   name: String!
   description: String!
-  price: Float!
+  price: Int!
   isSoldout: Boolean!
   productSaleslocation: ProductSaleslocation!
   productCategory: ProductCategory!
@@ -53,16 +54,16 @@ type Products {
 }
 
 type Query {
-  fetchBoards: [Board!]
-  fetchProducts: [Products!]!
-  fetchProduct(productId: String!): Products!
+  fetchBoards: [Board!]!
+  fetchProducts: [Product!]!
+  fetchProduct(productId: String!): Product!
 }
 
 type Mutation {
-  createBoard(createBoardInput: CreateBoardInput): String
-  createProduct(createProductInput: CreateProductInput!): Products!
-  updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Products!
-  deleteProduct(productId: String!, deleteProductInput: DeleteProductInput!): Boolean!
+  createBoard(createBoardInput: CreateBoardInput): Board!
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
+  deleteProduct(productId: String!): Boolean!
   createProductCategory(name: String!): ProductCategory!
   createUser(email: String!, password: String!, name: String!, age: Int!): User!
 }
@@ -91,15 +92,6 @@ input ProductSaleslocationInput {
 }
 
 input UpdateProductInput {
-  name: String
-  description: String
-  price: Int
-  productSaleslocation: ProductSaleslocationInput
-  productCategoryId: String
-  productTags: [String!]
-}
-
-input DeleteProductInput {
   name: String
   description: String
   price: Int

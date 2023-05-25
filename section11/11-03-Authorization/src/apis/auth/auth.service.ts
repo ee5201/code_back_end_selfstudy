@@ -29,7 +29,7 @@ export class AuthService {
   getAccessToken({ user }: IAuthServiceGetAccessToken): string {
     return this.jwtService.sign(
       { sub: user.id },
-      { secret: '나의 비밀번호', expiresIn: '1h' },
+      { secret: '나의비밀번호', expiresIn: '1h' },
     ); //토큰을 만든다.
   }
 }
