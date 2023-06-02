@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  my-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/myfolder/src
+    ports:
+      - 3000:3000
+    env_file:
+      - ./.env.docker
+
+  my-database:
+    platform: linux/x86_64
+    image: mysql:latest
+    environment:
+      # 자동으로 다운 비밀번호 설정하는것
+      MYSQL_DATABASE: 'mydocker'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - 3306:3306
+
+  # 컴퓨터이름
+  my-redis:
+    image: redis:latest
+    ports:
+      - 6379:6379

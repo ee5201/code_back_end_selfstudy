@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>결제 페이지</title>
+    <!-- axios-->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <!-- jQuery -->
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
+    ></script>
+    <!-- iamport.payment.js -->
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+    <script>
+      const requestPay = () => {
+        const IMP = window.IMP; // 생략 가능
+        IMP.init("imp18823724"); // 예: imp00000000a
+        IMP.request_pay(
+          {
+            pg: "kakaopay",
+            pay_method: "card",
+            // merchant_uid: "ORD20180131-0000011", // 주문번호÷
+            name: "노르웨이 회전 의자",
+            amount: 100, // 숫자 타입
+            buyer_email: "gildong@gmail.com",
+            buyer_name: "홍길동",
+            buyer_tel: "010-4242-4242",
+            buyer_addr: "서울특별시 강남구 신사동",
+            buyer_postcode: "01181",
+          },
+          function (rsp) {
+            console.log(rsp);
+            // callback
+            if (rsp.success) {
+              alert("결제 성공하였습니다. ");
+              axios.post(
+                "http://localhost:3000/graphql",
+                {
+                  query: `
+                      mutation{
+                          createPointTransaction(impUid:"${rsp.imp_uid}",amount:${rsp.paid_amount}){
+                            id
+                            impUid
+                            amount
+                            status
+                          }
+                          
+                        }
+                  `,
+                },
+                {
+                  headers: {
+                    Authorization:
+                      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwZjM3MjdjMC1jMjRlLTQzMTgtOWIyNS01MDdjNWZmMWE1NjEiLCJpYXQiOjE2ODUyODg0ODksImV4cCI6MTY4NTI5MjA4OX0.SbFRUc9i6bZdGG7hlN8bxv3hRNLnPeOZOvnKyMnhzZ8",
+                  },
+                }
+              );
+            } else {
+              alert("결제  실패하였습니다. ");
+            }
+            //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+          }
+        );
+      };
+    </script>
+  </head>
+  <body>
+    <button onclick="requestPay()">결제하기</button>
+  </body>
+</html>
