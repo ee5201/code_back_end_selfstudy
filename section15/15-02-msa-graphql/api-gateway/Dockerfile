@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:16
 
 WORKDIR /api-gateway/
 COPY ./package.json /api-gateway/

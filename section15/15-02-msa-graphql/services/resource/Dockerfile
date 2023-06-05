@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:16
 
 WORKDIR /resource-service/
 COPY ./package.json /resource-service/

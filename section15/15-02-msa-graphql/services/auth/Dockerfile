@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:16
 
 WORKDIR /auth-service/
 COPY ./package.json /auth-service/
