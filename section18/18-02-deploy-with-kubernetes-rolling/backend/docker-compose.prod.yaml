@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  my-backend:
+    image: asia.gcr.io/backend-388310/my-backend-project-nestjs:0.3
+    platform: linux/x86_64
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    # volumes:
+    #   - ./src:/myfolder/src
+    ports:
+      - 3000:3000
+    env_file:
+      - ./.env.prod
+
+  # my-database:
+  #   platform: linux/x86_64
+  #   image: mysql:latest
+  #   environment:
+  #     # 자동으로 다운 비밀번호 설정하는것
+  #     MYSQL_DATABASE: 'mydocker'
+  #     MYSQL_ROOT_PASSWORD: 'root'
+  #   ports:
+  #     - 3306:3306

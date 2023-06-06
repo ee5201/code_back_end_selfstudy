@@ -1,0 +1,32 @@
+<!-- `http://numbersapi.com/random?min=1&max=200` -->
+<!-- `https://koreanjson.com/posts/${num}` -->
+<!-- `https://koreanjson.com/posts?usesId=${userId}` -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Document</title>
+    <script>
+      const mycallback = () => {
+        const aa = new XMLHttpRequest();
+        aa.open("get", `http://numbersapi.com/random?min=1&max=200`);
+        aa.send();
+        aa.addEventListener("load", (res) => {
+          console.log(res);
+        });
+      };
+      const myPromise = () => {
+        axios.get(`http://numbersapi.com/random?min=1&max=200`).then((res) => {
+          axios
+            .get(`http://numbersapi.com/random?min=1&max=200`)
+            .then(() => {});
+        });
+      };
+      const myAsyncAwait = () => {};
+    </script>
+  </head>
+  <body>
+    <button onclick="mycallback()">CallBack 연습하기</button>
+    <button onclick="myPromise()">Promise 연습하기</button>
+    <button onclick="myAsyncAwait() ">AsyncAwait 연습하기</button>
+  </body>
+</html>
