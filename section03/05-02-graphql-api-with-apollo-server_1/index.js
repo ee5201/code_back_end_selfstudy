@@ -1,5 +1,5 @@
-import { ApolloServer } from '@apollo/server';
-import { startStandaloneServer } from '@apollo/server/standalone';
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
 
 // The GraphQL schema
 const typeDefs = `#graphql
@@ -11,7 +11,7 @@ const typeDefs = `#graphql
 // A map of functions which return data for the schema.
 const resolvers = {
   Query: {
-    hello: () => 'world',
+    hello: () => "world",
   },
 };
 
@@ -20,7 +20,7 @@ const server = new ApolloServer({
   resolvers,
 });
 
-const { url } = await startStandaloneServer(server,{
-  listen:{port:3000}
+const { url } = await startStandaloneServer(server, {
+  listen: { port: 3000 },
 });
 console.log(`🚀 Server ready at ${3000}`);

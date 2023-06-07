@@ -1,0 +1,12 @@
+{
+  "name": "05-02-graphql-api-with-apollo-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@apollo/server": "^4.6.0",
+    "cors": "^2.8.5",
+    "graphql": "^16.6.0"
+  }
+}
