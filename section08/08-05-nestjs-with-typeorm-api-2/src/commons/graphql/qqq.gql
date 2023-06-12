@@ -1,0 +1,23 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Board {
+  writer: String!
+  title: String!
+  contents: String!
+}
+
+type Query {
+  getHello: [Board!]
+}
+
+type Mutation {
+  createBoards(createBoardInput: CreateBoardInput): String
+}
+
+input CreateBoardInput {
+  writer: String
+  title: String
+  contents: String
+}
