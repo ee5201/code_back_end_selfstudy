@@ -1,0 +1,14 @@
+husky // 규칙을 안따르면 깃허브에 등록하지 못한다. 
+설정에 들가서 format on save에 들가서 저장 했을 경우 들여쓰기와 같은 의미 
+
+=>Schema-first는 구조를 먼저 구성해야한다. 
+typeDefs를 직접 하나하나 작성하는 방식이다 .
+
+
+nestjs방식은 code-first방식 
+code-first ex: Query: {
+  fetchBoards:(_,args)=> BoardReturn
+  return [
+    {number:1 , writer: "철수"}
+  ]
+}....
