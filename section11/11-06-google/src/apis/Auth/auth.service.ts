@@ -19,7 +19,7 @@ export class AuthService {
   getAccessToken({ user }: IAuthServiceGetAccessToken): string {
     return this.jwtService.sign(
       { sub: user.id },
-      { secret: 'mypassword', expiresIn: '10s' },
+      { secret: 'mypassword', expiresIn: '1h' },
     );
   }
 
@@ -52,7 +52,7 @@ export class AuthService {
   async loginOAuth({ req, res }) {
     let user = await this.userService.findOnByEmail({ email: req.user.email });
     console.log('이것은 user', req.user.email);
-    if (!user) user = await this.userService.create({ ...user });
+    if (!user) user = await this.userService.create({ ...req.user });
     this.setGoogleRefreshToken({ user, res });
     res.redirect(
       'http://localhost:5501/class/section11/11-06-google/frontend/social-login.html',

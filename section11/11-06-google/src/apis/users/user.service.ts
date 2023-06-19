@@ -31,7 +31,10 @@ export class UserService {
   }: IUserSercieCreate): Promise<User> {
     const user = await this.findOnByEmail({ email });
     if (user) throw new ConflictException('이미 등록된 이메일 입니다. ');
-    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const saltOrRounds = 10; // 솔트의 라운드 수
+    const hashedPassword = await bcrypt.hash(password, saltOrRounds);
+
     return this.UserRepository.save({
       email,
       password: hashedPassword,
